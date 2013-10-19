@@ -1,0 +1,80 @@
+//Creation of circular link list
+//Step to be remembered
+
+#include<stdio.h>
+#include<malloc.h>
+
+typedef struct node{
+	int data;
+	struct node* next;
+	}cll;
+cll* head=NULL;
+cll* prev_create;      // SO that we can create nodes again at secon attemptin choice
+void create();
+void disp();
+void del(int);
+int main()
+{
+	int i,n,ch;
+//	cll* head
+//	head=NULL;                                       //initializing pointer to header node;
+
+	do{
+		printf("1.Create 2.Display 3.Delete \nEnter your choice->");
+		scanf("%d",&ch);
+		switch(ch){
+			case 1:	printf("No. of nodes you want to create->");
+					scanf("%d",&n);
+			       	for(i=0;i<n;i++)
+						create();
+					break;
+			case 2:disp();
+					break;	
+			
+			case 3:printf("Node you want to delete:");
+					scanf("%d",&n);
+					del(n);
+					break;
+		}
+	}while(ch==1||ch==2||ch==3);
+	return 0;
+}
+
+void create(){
+	cll* temp;
+//	cll* prev_create;	why we can't place it here if we want to create once again chain of nodes by calling next A BIG QUESTION.........!
+	temp=(cll*)malloc(sizeof(cll));
+	scanf("%d",&(temp->data));
+	if(head==NULL)
+			head=temp;
+	else
+		prev_create->next=temp;
+	temp->next=head;
+	prev_create=temp;
+}
+void disp(){
+	cll* temp=head;
+	printf("And the elements are->");
+	do{
+		printf("%d  ",temp->data);
+		temp=temp->next;
+	}while(temp!=head);
+	printf("\n\n");
+}
+void del(int n){
+	cll* temp=head,*prev=head;
+	int count=1;
+	do{
+		
+		if(count==n){                                                 
+		prev->next=temp->next;                                //delete inside do while loop
+		free(temp);
+		return;
+		}
+		prev=temp;
+		temp=temp->next;
+		count++;
+	}while(temp!=head);
+	if(temp==head)
+		printf("No. not found\n");
+}
