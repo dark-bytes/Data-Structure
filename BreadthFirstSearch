@@ -23,7 +23,7 @@ class graph{
 		graph(){}
 		graph(int t_ver)
 		{
-			ver.resize(t_ver+1);
+			ver.resize(t_ver);
 			for(int i = 0;i<=ver.size(); i++){
 				ver[i].arc_point = NULL;
 			}
@@ -33,7 +33,7 @@ class graph{
 		{
 			arc* temp;
 			temp = (arc*)malloc(sizeof(arc));
-			cout<<"Sudhanshu";
+		//	cout<<"Sudhanshu";
 			if(ver[p].arc_point == NULL)
 			{
 				ver[p].arc_point = temp;
@@ -57,7 +57,7 @@ class graph{
 	
 	void display(int p)
 	{
-		arc* next = ver[p-1].arc_point;
+		arc* next = ver[p].arc_point;
 		cout<<"No. of nodes connected to node"<<p<<"->";
 		while(next != NULL)
 		{
